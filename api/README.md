@@ -1,8 +1,9 @@
 # Серверная часть проекта Django Vue SPA 
 
-Серверная часть проекта реализована с использованием [Django Rest Framework](https://www.django-rest-framework.org/) и [PostgreSQL](https://www.postgresql.org/)
+> Серверная часть проекта реализована с использованием [Django Rest Framework](https://www.django-rest-framework.org/) и [PostgreSQL](https://www.postgresql.org/)
 
 ## Установка и использование
+
 1. Необходимо скачать проект  
 2. Создать и активировать виртуальное окружение  
    ```python -m virualenv venv```  
