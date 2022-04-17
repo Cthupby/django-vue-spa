@@ -2,10 +2,37 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="row mb-2">
-        <h1>Posts</h1>
+        <div class="row align-items-start mb-2">
+          <h1 class="text-primary">Django Vue Single Page Application</h1>
+          <h4>Список постов:</h4>
+          <hr><br><br>
+          <div class="container">
+            <div class="col">
+              <div class="input-group mx-12 mb-3">
+                <select class="form-select form-select">
+                  <option selected>Выберите колонку для фильтрации</option>
+                  <option v-on:click="column = 'title'">Название</option>
+                  <option v-on:click="column = 'amount'">Количество</option>
+                  <option v-on:click="column = 'distance'">Расстояние</option>
+                </select>
+                <select class="form-select form-select">
+                  <option selected>Выберите условие для фильтрации</option>
+                  <option v-on:click="condition = '__iexact'">Равно</option>
+                  <option v-on:click="condition = '__icontains'">Содержит</option>
+                  <option v-on:click="condition = '__gt'">Больше</option>
+                  <option v-on:click="condition = '__lt'">Меньше</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Поиск" v-model="query" aria-label="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" v-on:click.prevent="getPosts()"">Поиск</button>
+                  </div>
+              </div>
+            </div>
+            <div class="col">
+          </div>
         </div>
-        <hr><br><br>
+      </div>
+    </div>
         <table class="table table-hover">
           <thead>
             <tr>
@@ -26,19 +53,15 @@
           </tbody>
         </table>
         <br><br>
-        
         <div class="col">
-        	
-        	<ul class="pagination justify-content-center">
-						<li class="page-item">
-							<button class="btn btn-primary" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
-						</li>
-
-						<li class="page-item">
-							<button class="btn btn-primary" @click="goToNextPage()" v-if="showNextButton">Next</button>
-						</li>
-					</ul>
-        
+          <ul class="pagination justify-content-center">
+		    <li class="page-item">
+			  <button class="btn btn-primary" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
+			</li>
+			<li class="page-item">
+			  <button class="btn btn-primary" @click="goToNextPage()" v-if="showNextButton">Next</button>
+			</li>
+		</ul>
         </div>
       </div>
     </div>
@@ -55,6 +78,8 @@ export default {
       showPreviousButton: false,
       currentPage: 1,
       query: '',
+      column: '',
+      condition: '',
       num_posts: 0
     };
   },
@@ -80,7 +105,7 @@ export default {
             this.num_posts = response.data.count
           })
       await axios
-        .get(`http://localhost:5000/api/posts/?page=${this.currentPage}`)
+        .get(`http://localhost:5000/api/posts/?page=${this.currentPage}&${this.column}${this.condition}=${this.query}`)
         .then(response => {
         this.posts = response.data.results
           if (response.data.next) {

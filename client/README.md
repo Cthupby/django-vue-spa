@@ -1,4 +1,4 @@
-# client
+# Клиентская часть проекта Django Vue SPA
 
 > Клиентская часть проекта реализована с использованием [Vuejs](https://ru.vuejs.org/v2/guide/)
 
