@@ -1,11 +1,8 @@
 from rest_framework import generics
-from django.http import JsonResponse
+from rest_framework import filters
+
 from .serializers import PostSerializer
 from .models import Post
-
-
-def ping_pong(request):
-    return JsonResponse('Pong!', safe=False)
 
 
 class PostList(generics.ListCreateAPIView):
@@ -14,6 +11,9 @@ class PostList(generics.ListCreateAPIView):
     '''
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['date', 'title', 'amount', 'distance']
+    ordering_fields = ['date', 'title', 'amount', 'distance']
 
     def perform_create(self, serializer):
         serializer.save()

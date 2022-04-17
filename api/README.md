@@ -12,4 +12,4 @@
   ```pip install -r requirements.txt```
 4. Запустить миграции базы данных и запустить проект  
   ```python manage.py migrate```  
-  ```python manage.py runserver```  
+  ```python manage.py runserver 5000```  
