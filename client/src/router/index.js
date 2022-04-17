@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Ping from '@/components/Ping';
 import Posts from '@/components/Posts';
 
 Vue.use(Router);
@@ -11,11 +10,6 @@ export default new Router({
       path: '/',
       name: 'Posts',
       component: Posts,
-    },
-    {
-      path: '/ping',
-      name: 'Ping',
-      component: Ping,
     },
   ],
   mode: 'history',

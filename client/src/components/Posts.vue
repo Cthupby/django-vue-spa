@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col">
+        <div class="row mb-2">
         <h1>Posts</h1>
+        </div>
         <hr><br><br>
         <table class="table table-hover">
           <thead>
@@ -20,15 +22,24 @@
               <td>{{ post.title }}</td>
               <td>{{ post.amount }}</td>
               <td>{{ post.distance }}</td>
-              <td>
-                <button type="button" class="btn btn-warning btn-sm">Update</button>
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-              </td>
             </tr>
           </tbody>
         </table>
         <br><br>
-        <button type="button" class="btn btn-primary">Add Post</button>
+        
+        <div class="col">
+        	
+        	<ul class="pagination justify-content-center">
+						<li class="page-item">
+							<button class="btn btn-primary" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
+						</li>
+
+						<li class="page-item">
+							<button class="btn btn-primary" @click="goToNextPage()" v-if="showNextButton">Next</button>
+						</li>
+					</ul>
+        
+        </div>
       </div>
     </div>
   </div>
@@ -36,28 +47,53 @@
 
 <script>
 import axios from 'axios';
-
 export default {
   data() {
     return {
       posts: [],
+      showNextButton: false,
+      showPreviousButton: false,
+      currentPage: 1,
+      query: '',
+      num_posts: 0
     };
   },
-  methods: {
-    getPosts() {
-      const path = 'http://localhost:5000/api/posts/';
-      axios.get(path)
-        .then((res) => {
-          this.posts = res.data;
-        })
-        .catch((error) => {
-          // eslint-отключение следующей строки
-          console.error(error);
-        });
-    },
+  mounted() {
+    this.getPosts()
   },
-  created() {
-    this.getPosts();
+  methods: {
+    goToNextPage() {
+      this.currentPage += 1
+      this.getPosts()
+    },
+    goToPreviousPage() {
+      this.currentPage -= 1
+      this.getPosts()
+    },
+    async getPosts() {
+      this.showNextButton = false
+      this.showPreviousButton = false
+      await axios
+        .get(`http://localhost:5000/api/posts/`)
+          .then(response => {
+            console.log(response.data)
+            this.num_posts = response.data.count
+          })
+      await axios
+        .get(`http://localhost:5000/api/posts/?page=${this.currentPage}`)
+        .then(response => {
+        this.posts = response.data.results
+          if (response.data.next) {
+          this.showNextButton = true
+          }
+          if (response.data.previous) {
+          this.showPreviousButton = true
+          }
+        })
+        .catch(error => {
+          console.log(error)
+      })
+    },
   },
 };
 </script>
