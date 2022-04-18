@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <div class="row">
       <div class="col">
         <div class="row align-items-start mb-2">
           <h1 class="text-primary">Django Vue Single Page Application</h1>
@@ -22,17 +21,20 @@
                   <option v-on:click="condition = '__gt'">Больше</option>
                   <option v-on:click="condition = '__lt'">Меньше</option>
                 </select>
-                <input type="text" class="form-control" placeholder="Поиск" v-model="query" aria-label="Search">
+                <input type="text"
+                       class="form-control"
+                       placeholder="Поиск"
+                       v-model="query"
+                       aria-label="Search">
                   <div class="input-group-append">
-                    <button class="btn btn-primary" v-on:click.prevent="getPosts()"">Поиск</button>
+                    <button class="btn btn-primary"
+                            v-on:click.prevent="getPosts()"">Поиск</button>
                   </div>
+                </div>
               </div>
             </div>
-            <div class="col">
           </div>
         </div>
-      </div>
-    </div>
         <table class="table table-hover">
           <thead>
             <tr>
@@ -52,17 +54,20 @@
             </tr>
           </tbody>
         </table>
-        <br><br>
-        <div class="col">
-          <ul class="pagination justify-content-center">
-		    <li class="page-item">
-			  <button class="btn btn-primary" @click="goToPreviousPage()" v-if="showPreviousButton">Previous</button>
-			</li>
-			<li class="page-item">
-			  <button class="btn btn-primary" @click="goToNextPage()" v-if="showNextButton">Next</button>
-			</li>
-		</ul>
-        </div>
+        <br><br>  
+      <div class="row align-items-end">
+        <ul class="pagination">
+          <li class="page-item ">
+            <button class="btn btn-primary"
+                    @click="goToPreviousPage()"
+                    :disabled="showNextButton">Previous page</button>
+          </li>
+          <li class="page-item">
+            <button class="btn btn-primary"
+                    @click="goToNextPage()"
+                    :disabled="showPreviousButton">Next page</button>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
