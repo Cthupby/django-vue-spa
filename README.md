@@ -1,5 +1,4 @@
 # Django Vue SPA 
-### Тестовое задние для компании WelbeX
 
 ```
 Нужно разработать таблицу в формате Single Page Application.
