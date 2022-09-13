@@ -18,12 +18,12 @@ class PostTestClass(TestCase):
     def test_title(self):
         post = Post.objects.get(id=1)
         field_label = post._meta.get_field('title').verbose_name
-        self.assertEquals(field_label,'title')
+        self.assertEquals(field_label, 'title')
 
     def test_date(self):
         post = Post.objects.get(id=1)
         field_label = post._meta.get_field('date').verbose_name
-        self.assertEquals(field_label,'date')
+        self.assertEquals(field_label, 'date')
 
     def test_title_max_length(self):
         post=Post.objects.get(id=1)
