@@ -23,5 +23,10 @@
 ## Технологии проекта:
 
 1. Database: [PostgreSQL](https://www.postgresql.org/)
-2. Server: [Django Rest Framework](https://www.django-rest-framework.org/)
+2. API: [Django Rest Framework](https://www.django-rest-framework.org/)
 3. Client: [Vuejs](https://ru.vuejs.org/v2/guide/)
+
+## Подробнее
+
+* [API](api/README.md)
+* [Client](client/README.md)
