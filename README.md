@@ -26,6 +26,15 @@
 2. API: [Django Rest Framework](https://www.django-rest-framework.org/)
 3. Client: [Vuejs](https://ru.vuejs.org/v2/guide/)
 
+## Запуск
+
+1. Необходимо скачать проект.  
+```https://github.com/Cthupby/django-vue-spa.git```
+2. Перейти в директорию проекта.  
+```cd django-vue-spa```
+3. Создать образы и контейнеры Docker, запустить их.  
+```docker compose up --build```
+
 ## Подробнее
 
 * [API](api/README.md)
