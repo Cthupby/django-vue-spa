@@ -1,8 +1,8 @@
 from rest_framework import generics
 from django_filters import rest_framework as filters
 
-from .serializers import PostSerializer
-from .models import Post
+from core.serializers import PostSerializer
+from core.models import Post
 
 
 class PostFilter(filters.FilterSet):
